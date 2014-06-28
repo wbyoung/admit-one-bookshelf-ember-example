@@ -55,7 +55,7 @@ var api = express.Router();
 
 api.post('/users', admit.create, function(req, res) {
   // user accessible via req.auth.user
-  res.json({ status: 'ok' });
+  res.json({ user: req.auth.user });
 });
 
 api.post('/sessions', admit.authenticate, function(req, res) {

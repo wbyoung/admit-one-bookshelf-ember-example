@@ -3,6 +3,6 @@
   {{input class="form-control" type="username" required="true" autofocus="true" placeholder="Username" value=username}}
   {{input class="form-control" type="password" required="true" autofocus="true" placeholder="Password" value=password}}
   <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-
+  {{#if error}}<div class="alert alert-danger">Error: {{error}}.</div>{{/if}}
   {{#link-to 'signup' class="signup" }}Signup{{/link-to}}
 </form>

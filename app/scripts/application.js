@@ -39,7 +39,8 @@ App.LoginController = Ember.Controller.extend({
       var self = this;
       var session = this.get('session');
       var credentials = this.getProperties('username', 'password');
-      this.set('password', null);
+      this.set('error', undefined);
+      this.set('password', undefined);
       session.authenticate(credentials).then(function() {
         var attemptedTransition = self.get('attemptedTransition');
         if (attemptedTransition) {
@@ -50,7 +51,7 @@ App.LoginController = Ember.Controller.extend({
         }
       })
       .catch(function(error) {
-        // handle error
+        self.set('error', error);
       });
     }
   }
@@ -79,13 +80,16 @@ App.SignupController = Ember.ObjectController.extend({
       var session = this.get('session');
       var self = this;
 
+      this.set('error', undefined);
       this.get('model').save() // create the user
       .then(function() {
-        session.login({ username: this.get('model.username') });
+        session.login({ username: self.get('model.username') });
         self.transitionToRoute('profile');
       })
       .catch(function(error) {
-        // handle error
+        if (error.responseJSON) { error = error.responseJSON; }
+        if (error.error) { error = error.error; }
+        self.set('error', error);
       });
     }
   }
