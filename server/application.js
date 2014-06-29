@@ -47,7 +47,7 @@ Token = bookshelf.Model.extend({
   tableName: 'tokens'
 });
 
-var admit = require('admit-one-bookshelf')({
+var admit = require('admit-one')('bookshelf', {
   bookshelf: { modelClass: User }
 });
 
