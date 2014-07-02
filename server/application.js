@@ -60,7 +60,7 @@ api.post('/users', admit.create, function(req, res) {
 
 api.post('/sessions', admit.authenticate, function(req, res) {
   // user accessible via req.auth.user
-  res.json({ status: 'ok' });
+  res.json({ session: req.auth.user });
 });
 
 // all routes defined from here on will require authorization
